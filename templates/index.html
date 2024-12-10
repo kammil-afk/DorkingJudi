@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Dorking</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 20px;
+      }
+      #log {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      a {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dorking Tool</h1>
+    <form method="POST">
+      <label for="domain">Masukkan Domain:</label>
+      <input
+        type="text"
+        id="domain"
+        name="domain"
+        placeholder="example.com"
+        required
+      />
+      <button type="submit">Cari</button>
+    </form>
+
+    {% if log %}
+    <div id="log">
+      <h2>Log Proses:</h2>
+      {% for entry in log %}
+      <p>{{ entry }}</p>
+      {% endfor %}
+    </div>
+    {% endif %} {% if results %}
+    <h2>Hasil Pencarian:</h2>
+    <ul>
+      {% for result in results %}
+      <li>
+        <strong>Domain:</strong> {{ result.domain }}<br />
+        <strong>Alasan:</strong> {{ result.reason }}<br />
+        <strong>Snippet:</strong> {{ result.snippet }}<br />
+        <strong>Link:</strong>
+        <a href="{{ result.link }}" target="_blank">{{ result.link }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </body>
+</html>
